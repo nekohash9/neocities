@@ -1,0 +1,120 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles.css" />
+		<title>not found - neko's den</title>
+		<style>
+			:root {
+				--sidebar-width: 200px;
+			}
+
+			body {
+				margin: 0;
+				font-family: "Courier New", monospace;
+				background: #f0f4f4;
+				text-transform: lowercase;
+			}
+
+			.main-content {
+				min-height: 100vh;
+				padding: 40px;
+				position: relative;
+				z-index: 1;
+				background: repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 134, 137, 0.02) 2px,
+					rgba(0, 134, 137, 0.02) 4px
+				);
+			}
+
+			.info-bar {
+				border: 2px solid;
+				border-color: #c8e0e0 #98b8b8 #98b8b8 #c8e0e0;
+				background: #e8f4f4;
+				color: #2a6a6a;
+				font-size: 11px;
+				font-family: "Courier New", monospace;
+				padding: 6px 10px;
+				margin-bottom: 25px;
+				text-align: center;
+			}
+
+			.page-404 {
+				max-width: 820px;
+				margin: 80px auto;
+				padding: 28px;
+				border: 3px solid;
+				border-color: #c8d8d8 #a8c0c0 #a8c0c0 #c8d8d8;
+				background: linear-gradient(180deg, #f4f9ff 0%, #e4eef2 100%);
+				box-shadow: 4px 4px 0 rgba(0, 98, 142, 0.2);
+				text-align: center;
+			}
+
+			.page-404 h1 {
+				margin: 0 0 10px 0;
+				font-size: 2.4rem;
+				letter-spacing: 0.6rem;
+				color: #00628e;
+			}
+
+			.page-404 p {
+				color: #33606e;
+				line-height: 1.6;
+			}
+
+			.home-link {
+				display: inline-block;
+				margin-top: 16px;
+				padding: 8px 12px;
+				border: 2px solid #00628e;
+				background: #fff;
+				color: #00628e;
+				text-decoration: none;
+				font-weight: bold;
+				border-radius: 6px;
+			}
+
+			@media (max-width: 600px) {
+				.main-content {
+					margin-left: 0;
+					padding: 20px;
+				}
+
+				.page-404 {
+					margin: 30px 10px;
+					padding: 18px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main-content solo">
+			<div class="info-bar">
+				<span>★ ★ ★ oops — page not found. take a stroll back to the den ★ ★ ★</span>
+			</div>
+
+			<section class="page-404" role="main">
+				<h1>404</h1>
+				<p>
+					the page you are trying to reach has wandered into the foggy
+					twilight. i'll guide you back.
+				</p>
+				<p>
+					return to the den, revisit the playlist, or peek at the latest
+					entries.
+				</p>
+
+				<div class="button-row">
+					<a class="home-link primary" href="index.html">return home</a>
+					<a class="home-link subtle" href="music.html">browse music</a>
+				</div>
+				<p class="note">Need something else? try the secret (press the invisible dot).</p>
+			</section>
+		</div>
+	</body>
+</html>

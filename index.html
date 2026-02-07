@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+  <!--
+        ⢰⠶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠶⠲⣄⠀
+    ⠀⠀⣠⡟⠀⠈⠙⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡶⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠾⠋⠁⠀⠀⢽⡄
+    ⠀⠀⡿⠀⠀⠀⠀⠀⠉⠷⣄⣀⣤⠤⠤⠤⠤⢤⣷⡀⠙⢷⡄⠀⠀⠀⠀⣠⠞⠉⠀⠀⠀⠀⠀⠈⡇
+    ⠀⢰⡇⠀⠀⠀⠀⠀⠀⠀⠉⠳⣄⠀⠀⠀⠀⠀⠈⠁⠀⠀⠹⣦⠀⣠⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⡗
+    ⠀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣻⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣏
+    ⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇
+    ⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠂
+    ⠀⢿⠀⠀⠀⠀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣤⣤⡀⠀⠀⠀⠀⠀⣸⠇⠀
+    ⠀⠘⣇⠀⠀⠀⠀⠉⠉⠛⠛⢿⣶⣦⠀⠀⠀⠀⠀⠀⢴⣾⣟⣛⡋⠋⠉⠉⠁⠀⠀⠀⠀⣴⠏⠀⠀
+    ⢀⣀⠙⢷⡄⠀⠀⣀⣤⣶⣾⠿⠋⠁⠀⢴⠶⠶⠄⠀⠀⠉⠙⠻⠿⣿⣷⣶⡄⠀⠀⡴⠾⠛⠛⣹⠇
+    ⢸⡍⠉⠉⠉⠀⠀⠈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⣬⠷⣆⣠⡤⠄⢀⣤⠞⠁⠀
+    ⠈⠻⣆⡀⠶⢻⣇⡴⠖⠀⠀⠀⣴⡀⣀⡴⠚⠳⠦⣤⣤⠾⠀⠀⠀⠀⠀⠘⠟⠋⠀⠀⠀⢻⣄⠀⠀
+    ⠀⠀⣼⠃⠀⠀⠉⠁⠀⠀⠀⠀⠈⠉⢻⡆⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⠀⠀
+    ⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡀⠀⠀⢀⡇⠀⠀⠀⠀⠀⠀⠀⠀⣀⡿⠧⠿⠿⠟⠀⠀
+    ⠀⣾⡴⠖⠛⠳⢦⣿⣶⣄⣀⠀⠀⠀⠀⠘⢷⣀⠀⣸⠃⠀⠀⠀⣀⣀⣤⠶⠚⠉⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠈⢷⡀⠈⠻⠦⠀⠀⠀⠀⠉⠉⠁⠀⠀⠀⠀⠹⣆⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⢀⡴⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡄⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⢲⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠋⠀⠀⠀⠀⠀⠀⠀
+    my code is horrid but at least there's some secrets for u
+    -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>neko's den</title>
+    <style>
+      .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 40px;
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 134, 137, 0.02) 2px,
+          rgba(0, 134, 137, 0.02) 4px
+        );
+      }
+      /* secret button - completely hidden */
+      .art-eye-button {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: transparent;
+        color: transparent;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 9999;
+        opacity: 0;
+        font-family: "Courier New", monospace;
+      }
+
+      .art-link-button {
+        position: fixed;
+        bottom: 30px;
+        right: 10px;
+        background: #fff;
+        color: #000;
+        border: 2px solid #000;
+        padding: 8px 12px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+        z-index: 9998;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        font-family: "Courier New", monospace;
+      }
+
+      .art-link-button.visible {
+        opacity: 1;
+        pointer-events: auto;
+        animation: linkBounce 0.5s ease;
+      }
+
+      .art-link-button:hover {
+        background: #f0f0f0;
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+      }
+
+      /* window Styles */
+      /* shared modal window styles */
+      .modal-window {
+        position: fixed;
+        display: none;
+        width: 400px;
+        height: 500px;
+        min-width: 250px;
+        min-height: 200px;
+        max-width: 90vw;
+        max-height: 90vh;
+        background: #e8f0f0;
+        border: 2px solid;
+        border-color: #008689;
+        box-shadow: 2px 2px 10px rgba(0, 134, 137, 0.3);
+        font-family: "MS Sans Serif", Arial, sans-serif;
+        font-size: 15px;
+        right: 50px;
+        left: auto;
+        user-select: none;
+        overflow: hidden;
+        resize: both;
+      }
+
+      .modal-window.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-titlebar {
+        background: linear-gradient(90deg, #008689, #40b0b3);
+        color: white;
+        padding: 2px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: move;
+        height: 22px;
+        font-weight: bold;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      .modal-titlebar-text {
+        flex: 1;
+        padding-left: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .modal-close-btn {
+        width: 16px;
+        height: 14px;
+        border: 1px solid #6a9a9a;
+        background: #c8e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 10px;
+        color: #2a5a5a;
+        margin-left: 2px;
+      }
+
+      .modal-close-btn:active {
+        border-color: #4a7a7a;
+      }
+
+      .modal-content {
+        flex: 1;
+        padding: 8px;
+        background: #f8fcfc;
+        overflow: auto;
+        line-height: 1.6;
+        min-height: 0;
+        color: #2a5a5a;
+      }
+
+      .modal-content p {
+        margin: 8px 0;
+        word-wrap: break-word;
+      }
+
+      .modal-content img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* resize handle styling */
+      .modal-window::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 16px;
+        height: 16px;
+        cursor: se-resize;
+        background: linear-gradient(
+          135deg,
+          transparent 50%,
+          #008689 50%,
+          #008689 60%,
+          transparent 60%,
+          transparent 70%,
+          #008689 70%,
+          #008689 80%,
+          transparent 80%
+        );
+      }
+
+      /* window specific styles */
+      .window {
+        z-index: 300;
+        top: 100px;
+      }
+
+      .thoughts-modal {
+        z-index: 301;
+        top: 120px;
+        right: 70px;
+      }
+
+      .entry {
+        margin: 10px 0 20px 0;
+        background-color: #e8f4f4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="art-bg" aria-hidden="true"></div>
+
+    <div class="sidebar"></div>
+    <script src="sidebar.js"></script>
+    <div class="info-bar">
+      <span>★ ★ ★ welcome to my den! have a good stay . . . ★ ★ ★</span>
+    </div>
+    <!-- thoughts modal window -->
+    <div id="thoughts-window" class="modal-window thoughts-modal">
+      <div class="modal-titlebar">
+        <span class="modal-titlebar-text">thoughts</span>
+        <button class="modal-close-btn" onclick="closeThoughtsWindow()">
+          ×
+        </button>
+      </div>
+      <div class="modal-content">
+        <div class="entry">
+          <p>[ 21.01.2026 ]</p>
+          <p>
+            i finally finished my exams. it wasn't a rough week though, but i'm
+            glad it's over. now i can focus on my projects and hobbies again. i
+            feel a bit tired, but also relieved. i think i'll take a short
+            break.
+          </p>
+          <p>
+            maybe i should go for a walk some time. it's been a while since i've
+            just taken time to enjoy nature and clear my head.
+          </p>
+        </div>
+        <div class="entry">
+          <p>[ yummy omelette thing my partner makes ]</p>
+          <p>
+            you will need avocado, some mayo, turkey breast fillet, eggs, and
+            spinach. spread the avocado on the tortilla, cook 2 eggs with
+            spinach added, place the fillet and everything else on the tortilla,
+            and fold it in half like a taco. yummy!
+          </p>
+        </div>
+        <div class="entry">
+          <p>[ 06.02.2026 ]</p>
+          <p>
+            almost a month since my exams ended. i've been doing a lot of fun
+            stuff, like tinkering with small web projects and just relaxing.
+            it's been really nice to have some free time again. i feel like i've
+            been able to recharge and get back into my creative flow. looking
+            forward to sharing more of my work soon!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- about window -->
+    <div id="about-window" class="modal-window window">
+      <div class="modal-titlebar">
+        <span class="modal-titlebar-text">about</span>
+        <button class="modal-close-btn" onclick="closeAboutWindow()">×</button>
+      </div>
+      <div class="modal-content">
+        <div class="entry">
+          <p>hi i'm neko</p>
+          <p>he/him</p>
+          <p>
+            i make stuff sometimes. i like cats and tea and rain and bookstores
+            and orange plasma displays. i like grainy photos in the dead of
+            night.
+          </p>
+          <p>enjoy your stay! 🐱</p>
+          <p>to contact me, here is my discord: nekohash</p>
+        </div>
+        <img
+          src="https://i.kym-cdn.com/photos/images/original/002/548/076/2cf.gif"
+          alt="boykisser"
+          style="justify-content: center; display: block; margin: 0 auto"
+        />
+      </div>
+    </div>
+
+    <!-- art link button -->
+    <a id="art-link-button" class="art-link-button" href="#" target="_blank">
+      view on e926
+    </a>
+
+    <!-- secret art button  -->
+    <button id="art-eye-button" class="art-eye-button" title="hmm what's this?">
+      .
+    </button>
+
+    <script>
+      // window dragging functionality
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+      const aboutWindow = document.getElementById("about-window");
+      const titlebar = aboutWindow.querySelector(".modal-titlebar");
+
+      function openAboutWindow() {
+        aboutWindow.classList.add("active");
+      }
+
+      function closeAboutWindow() {
+        aboutWindow.classList.remove("active");
+      }
+
+      titlebar.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        const rect = aboutWindow.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        titlebar.style.cursor = "move";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const windowRect = aboutWindow.getBoundingClientRect();
+          const windowWidth = windowRect.width;
+          const windowHeight = windowRect.height;
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          const sidebarWidth = 200;
+
+          let newLeft = e.clientX - offsetX;
+          let newTop = e.clientY - offsetY;
+
+          // prevent window from going behind sidebar
+          if (newLeft < sidebarWidth) {
+            newLeft = sidebarWidth;
+          }
+          // prevent window from going off right
+          if (newLeft + windowWidth > viewportWidth) {
+            newLeft = viewportWidth - windowWidth;
+          }
+          // prevent window from going off top
+          if (newTop < 0) {
+            newTop = 0;
+          }
+          // prevent window from going off bottom
+          if (newTop + windowHeight > viewportHeight) {
+            newTop = viewportHeight - windowHeight;
+          }
+
+          aboutWindow.style.left = newLeft + "px";
+          aboutWindow.style.top = newTop + "px";
+          aboutWindow.style.right = "auto";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      // about button click handler - wait for sidebar to be ready
+      document.addEventListener("sidebarReady", () => {
+        document.getElementById("about-btn").addEventListener("click", (e) => {
+          e.preventDefault();
+          openAboutWindow();
+        });
+      });
+
+      // thoughts window dragging functionality
+      let thoughtsIsDragging = false;
+      let thoughtsOffsetX = 0;
+      let thoughtsOffsetY = 0;
+      const thoughtsWindow = document.getElementById("thoughts-window");
+      const thoughtsTitlebar = thoughtsWindow.querySelector(".modal-titlebar");
+
+      function openThoughtsWindow() {
+        thoughtsWindow.classList.add("active");
+      }
+
+      function closeThoughtsWindow() {
+        thoughtsWindow.classList.remove("active");
+      }
+
+      thoughtsTitlebar.addEventListener("mousedown", (e) => {
+        thoughtsIsDragging = true;
+        const rect = thoughtsWindow.getBoundingClientRect();
+        thoughtsOffsetX = e.clientX - rect.left;
+        thoughtsOffsetY = e.clientY - rect.top;
+        thoughtsTitlebar.style.cursor = "move";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (thoughtsIsDragging) {
+          const windowRect = thoughtsWindow.getBoundingClientRect();
+          const windowWidth = windowRect.width;
+          const windowHeight = windowRect.height;
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          const sidebarWidth = 200;
+
+          let newLeft = e.clientX - thoughtsOffsetX;
+          let newTop = e.clientY - thoughtsOffsetY;
+
+          // prevent window from going behind sidebar
+          if (newLeft < sidebarWidth) {
+            newLeft = sidebarWidth;
+          }
+          // prevent window from going off right
+          if (newLeft + windowWidth > viewportWidth) {
+            newLeft = viewportWidth - windowWidth;
+          }
+          // prevent window from going off top
+          if (newTop < 0) {
+            newTop = 0;
+          }
+          // prevent window from going off bottom
+          if (newTop + windowHeight > viewportHeight) {
+            newTop = viewportHeight - windowHeight;
+          }
+
+          thoughtsWindow.style.left = newLeft + "px";
+          thoughtsWindow.style.top = newTop + "px";
+          thoughtsWindow.style.right = "auto";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        thoughtsIsDragging = false;
+      });
+
+      // thoughts button click handler - wait for sidebar to be ready
+      document.addEventListener("sidebarReady", () => {
+        document
+          .getElementById("thoughts-btn")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            openThoughtsWindow();
+          });
+      });
+
+      // load random e926 art using a curated list of image URLs
+
+      const artBg = document.querySelector(".art-bg");
+      let currentImageUrl = null;
+      let currentPostUrl = null;
+      const triggerArtUpdate = () => {
+        if (!artBg) return;
+        artBg.classList.remove("art-update");
+        void artBg.offsetWidth;
+        artBg.classList.add("art-update");
+      };
+
+      /*
+        Previously this script attempted to fetch live posts from e926.
+        That request is commented out because Neocities enforces a strict
+        Content Security Policy and e926 is protected by Cloudflare's
+        challenge, which prevents direct client-side API requests from
+        working reliably. To re-enable live fetching, uncomment the
+        fetch block below and remove or adapt the static `artEntries`.
+
+      // Example fetch (COMMENTED OUT):
+      // fetch('https://e926.net/posts.json?limit=6&tags=order:random+clothed')
+      //   .then((r) => r.json())
+      //   .then((data) => {
+      //     // map API posts to local entry format { imageUrl, postUrl }
+      //     const fetched = (data.posts || []).map((p) => ({
+      //       imageUrl: p.file?.url || p.sample_url || p.preview_url,
+      //       postUrl: 'https://e926.net/posts/' + p.id,
+      //     })).filter(Boolean);
+      //     if (fetched.length) {
+      //       // replace artEntries at runtime
+      //       artEntries.length = 0;
+      //       fetched.forEach((e) => artEntries.push(e));
+      //       loadRandomFurryBackground();
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.warn('e926 fetch failed (kept commented):', err);
+      //   });
+
+      */
+
+      const artEntries = [
+        {
+          imageUrl:
+            "https://static1.e926.net/data/17/f5/17f5928c6b63f79397ad175d2aa447fa.webp",
+          postUrl: "https://e926.net/posts/6124357",
+        },
+        {
+          imageUrl:
+            "https://static1.e926.net/data/c5/87/c587d19b55a46e6edf7d06b4d7534d92.png",
+          postUrl: "https://e926.net/posts/2764591",
+        },
+        {
+          imageUrl:
+            "https://static1.e926.net/data/f8/d6/f8d69e02298d1c9508bac08c954a2ba9.png",
+          postUrl: "https://e926.net/posts/5813798",
+        },
+        {
+          imageUrl:
+            "https://static1.e926.net/data/0e/ba/0ebaa75065f6c79052d25218e3edbee8.png",
+          postUrl: "https://e926.net/posts/5794786",
+        },
+      ];
+
+      const getRandomEntry = () =>
+        artEntries[Math.floor(Math.random() * artEntries.length)];
+
+      function loadRandomFurryBackground() {
+        if (!artBg || artEntries.length === 0) return;
+        const entry = getRandomEntry();
+        currentImageUrl = entry.imageUrl;
+        currentPostUrl = entry.postUrl;
+        artBg.style.backgroundImage = `url('${entry.imageUrl}')`;
+        triggerArtUpdate();
+        console.log("Art entry selected:", entry.postUrl);
+      }
+
+      // secret eye-button toggler
+      const eyeButton = document.getElementById("art-eye-button");
+      const artLinkButton = document.getElementById("art-link-button");
+
+      eyeButton.addEventListener("click", () => {
+        // on/off background in the right area (outside sidebar)
+        artBg.classList.toggle("visible");
+
+        // toggle link button visibility
+        artLinkButton.classList.toggle("visible");
+
+        // toggle secret active state
+        eyeButton.classList.toggle("secret-active");
+
+        // update link href when showing art
+        if (artBg.classList.contains("visible")) {
+          artLinkButton.href = currentPostUrl;
+        }
+      });
+
+      // load art immediately
+      loadRandomFurryBackground();
+
+      // reload every 5 minutes
+      setInterval(loadRandomFurryBackground, 1 * 60 * 1000);
+    </script>
+  </body>
+</html>

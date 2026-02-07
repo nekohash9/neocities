@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>photos - neko's den</title>
+    <style>
+      .main-content {
+        margin-left: var(--sidebar-width);
+        padding: 40px;
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 134, 137, 0.02) 2px,
+          rgba(0, 134, 137, 0.02) 4px
+        );
+      }
+
+      /* Retro page header - pastel */
+      .page-header {
+        padding: 15px 30px;
+        margin-bottom: 30px;
+        animation: fadeIn 0.8s ease;
+        background: linear-gradient(180deg, #e8f0f0 0%, #d8e8e8 100%);
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        border: 3px solid;
+        border-color: #c8d8d8 #a8c0c0 #a8c0c0 #c8d8d8;
+        box-shadow:
+          4px 4px 0 rgba(0, 134, 137, 0.2),
+          inset 0 0 20px rgba(0, 134, 137, 0.05);
+        position: relative;
+      }
+
+      .page-header::before,
+      .page-header::after {
+        content: "✧";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #008689;
+        font-size: 18px;
+        animation: starTwinkle 1.5s ease-in-out infinite;
+      }
+
+      .page-header::before {
+        left: 10px;
+      }
+
+      .page-header::after {
+        right: 10px;
+        animation-delay: 0.75s;
+      }
+
+      .page-header h1 {
+        color: #008689;
+        font-size: 2rem;
+        letter-spacing: 0.8rem;
+        margin: 0;
+        text-shadow:
+          0 0 10px rgba(0, 134, 137, 0.3),
+          0 0 20px rgba(0, 134, 137, 0.1),
+          2px 2px 0 rgba(255, 255, 255, 0.5);
+        font-family: "Courier New", monospace;
+      }
+
+      /* ASCII art decoration */
+      .ascii-decoration {
+        text-align: center;
+        color: #888;
+        font-family: "Courier New", monospace;
+        font-size: 10px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        white-space: pre;
+        animation: fadeIn 1s ease;
+      }
+
+      /* Folder/Category Styles - Win98 style, pastel */
+      .folders-container {
+        max-width: 950px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: #e0ebeb;
+        padding: 20px;
+        border: 2px solid;
+        border-color: #c8d8d8 #a8c0c0 #a8c0c0 #c8d8d8;
+        box-shadow: 2px 2px 0 rgba(0, 134, 137, 0.15);
+      }
+
+      .folders-title {
+        background: linear-gradient(90deg, #008689 0%, #40b0b3 100%);
+        color: #f0f8f8;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 3px 6px;
+        margin: -20px -20px 15px -20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .folders-title::before {
+        content: "📁";
+      }
+
+      .folder {
+        animation: fadeIn 0.5s ease;
+      }
+
+      .folder summary {
+        background: #e8f4f4;
+        color: #2a5a5a;
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.1s;
+        font-family: "Courier New", monospace;
+        border: 2px solid;
+        border-color: #c8e0e0 #98b8b8 #98b8b8 #c8e0e0;
+      }
+
+      .folder summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .folder summary::before {
+        content: "📂";
+        font-size: 16px;
+        transition: transform 0.2s;
+      }
+
+      .folder[open] summary::before {
+        content: "📂";
+      }
+
+      .folder summary:hover {
+        background: #d8f0f0;
+      }
+
+      .folder summary:active {
+        border-color: #98b8b8 #c8e0e0 #c8e0e0 #98b8b8;
+      }
+
+      .folder-content {
+        padding: 20px 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        background: #f0f8f8;
+        border: 2px solid;
+        border-color: #98b8b8 #c8e0e0 #c8e0e0 #98b8b8;
+        margin-top: -2px;
+      }
+
+      /* Photo Frame - Retro polaroid style, pastel */
+      .photo-item {
+        position: relative;
+        transition: transform 0.2s;
+      }
+
+      .photo-item:hover {
+        transform: scale(1.02) rotate(-1deg);
+      }
+
+      .photo-frame {
+        padding: 10px 10px 35px 10px;
+        background: #f8ffff;
+        border: 2px solid;
+        border-color: #c8e0e0 #a0c0c0 #a0c0c0 #c8e0e0;
+        box-shadow: 3px 3px 0 rgba(0, 134, 137, 0.15);
+        position: relative;
+      }
+
+      .photo-frame::after {
+        content: "click to view ✧";
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        color: #6a9a9a;
+        font-family: "Courier New", monospace;
+        white-space: nowrap;
+      }
+
+      .photo-frame img {
+        width: 100%;
+        display: block;
+        background: #e0f0f0;
+        border: 1px solid #b0d0d0;
+        image-rendering: auto;
+      }
+
+      .photo-frame a {
+        display: block;
+        text-decoration: none;
+      }
+
+      /* Photo counter badge - pastel */
+      .photo-count {
+        background: #d8f0f0;
+        color: #2a6a6a;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-left: auto;
+        font-family: "Courier New", monospace;
+        border: 1px solid #b0d0d0;
+      }
+
+      /* Marquee style info bar - pastel */
+
+      /* Decorative elements - pastel */
+      .neo-decoration {
+        text-align: center;
+        margin: 20px 0;
+        font-family: "Courier New", monospace;
+        color: #888;
+        font-size: 12px;
+      }
+
+      .neo-decoration .stars {
+        color: #008689;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      /* Tooltip for about button */
+      .about-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      .about-tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: 130%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        background: #f0f8f8;
+        color: #2a5a5a;
+        font-size: 11px;
+        padding: 12px;
+        border: 2px solid;
+        border-color: #c8e0e0 #98b8b8 #98b8b8 #c8e0e0;
+        box-shadow: 3px 3px 0 rgba(0, 134, 137, 0.15);
+        z-index: 100;
+        transition:
+          opacity 0.3s,
+          visibility 0.3s;
+        text-align: left;
+        line-height: 1.5;
+      }
+
+      .about-tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 8px solid transparent;
+        border-top-color: #98b8b8;
+      }
+
+      .about-wrapper:hover .about-tooltip,
+      .about-wrapper:focus-within .about-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      #aboutphotosbtn {
+        cursor: help;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          margin-left: 0;
+          padding: 15px;
+        }
+
+        .page-header h1 {
+          font-size: 1.3rem;
+          letter-spacing: 0.4rem;
+        }
+
+        .page-header::before,
+        .page-header::after {
+          display: none;
+        }
+
+        .folder summary {
+          padding: 10px 12px;
+          font-size: 12px;
+        }
+
+        .folder-content {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 15px;
+          padding: 15px 10px;
+        }
+
+        .ascii-decoration {
+          font-size: 7px;
+        }
+
+        .folders-container {
+          padding: 10px;
+          max-width: 100%;
+        }
+
+        .folders-title {
+          margin: -10px -10px 10px -10px;
+        }
+
+        .photo-frame {
+          padding: 8px 8px 30px 8px;
+        }
+
+        .about-tooltip {
+          position: fixed;
+          bottom: auto;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 250px;
+        }
+
+        .about-tooltip::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .folder-content {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .page-header h1 {
+          font-size: 1.1rem;
+          letter-spacing: 0.3rem;
+        }
+
+        .info-bar {
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar"></div>
+    <script src="sidebar.js"></script>
+
+    <div class="main-content">
+      <div class="info-bar">
+        <span
+          >★ ★ ★ thanks for visiting my photo gallery! all photos taken by me ~
+          feel free to look around ★ ★ ★</span
+        >
+      </div>
+
+      <div class="page-header">
+        <h1>p h o t o s</h1>
+      </div>
+
+      <div class="neo-decoration">
+        <span class="stars">✦ ✧ ✦</span>
+      </div>
+
+      <div class="folders-container">
+        <div class="folders-title">photo_gallery</div>
+
+        <details class="folder">
+          <summary>ending_school<span class="photo-count">2</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/alye.jpg" target="_blank">
+                  <img src="photos/alye.jpg" alt="Scarlet Sails" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/poslvypuska.jpg" target="_blank">
+                  <img src="photos/poslvypuska.jpg" alt="after graduation" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>vyborg!<span class="photo-count">4</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/vyborg.jpg" target="_blank">
+                  <img src="photos/vyborg.jpg" alt="Vyborg" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/vyborg2.jpg" target="_blank">
+                  <img src="photos/vyborg2.jpg" alt="Vyborg" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/vyborg3.jpg" target="_blank">
+                  <img src="photos/vyborg3.jpg" alt="Vyborg" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/parkmonrepo.jpg" target="_blank">
+                  <img src="photos/parkmonrepo.jpg" alt="Park Monrepo" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>moscow!<span class="photo-count">5</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/federation.jpg" target="_blank">
+                  <img src="photos/federation.jpg" alt="Federation Tower" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/federation2.jpg" target="_blank">
+                  <img src="photos/federation2.jpg" alt="Federation Tower" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/msu2.jpg" target="_blank">
+                  <img src="photos/msu2.jpg" alt="MSU" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/redsquare.jpg" target="_blank">
+                  <img src="photos/redsquare.jpg" alt="Red Square" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/vdnh.jpg" target="_blank">
+                  <img src="photos/vdnh.jpg" alt="VDNH" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>rostov!<span class="photo-count">8</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/roadtorostov.jpg" target="_blank">
+                  <img src="photos/roadtorostov.jpg" alt="Road to Rostov" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast.jpg" target="_blank">
+                  <img src="photos/rostovoblast.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast2.jpg" target="_blank">
+                  <img src="photos/rostovoblast2.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast3.jpg" target="_blank">
+                  <img src="photos/rostovoblast3.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast4.jpg" target="_blank">
+                  <img src="photos/rostovoblast4.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast5.jpg" target="_blank">
+                  <img src="photos/rostovoblast5.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/rostovoblast6.jpg" target="_blank">
+                  <img src="photos/rostovoblast6.jpg" alt="Rostov Oblast" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a
+                  href="photos/thisiswhereipostfrom.jpg"
+                  target="_blank"
+                  title="this is where i post from xd"
+                >
+                  <img
+                    src="photos/thisiswhereipostfrom.jpg"
+                    alt="Rostov Oblast"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>leningrad_region<span class="photo-count">8</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/lenoblast.jpg" target="_blank">
+                  <img src="photos/lenoblast.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/lenoblast2.jpg" target="_blank">
+                  <img src="photos/lenoblast2.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/lenoblast3.jpg" target="_blank">
+                  <img src="photos/lenoblast3.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/lenoblast4.jpg" target="_blank">
+                  <img src="photos/lenoblast4.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/parkspb.jpg" target="_blank">
+                  <img src="photos/parkspb.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/parkspb2.jpg" target="_blank">
+                  <img src="photos/parkspb2.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/parkspb3.jpg" target="_blank">
+                  <img src="photos/parkspb3.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/parkspb4.jpg" target="_blank">
+                  <img src="photos/parkspb4.jpg" alt="Leningrad Region" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>other<span class="photo-count">4</span></summary>
+          <div class="folder-content">
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/samolotovoe.jpg" target="_blank">
+                  <img src="photos/samolotovoe.jpg" alt="samolotovoe" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/bumblebee.jpg" target="_blank">
+                  <img src="photos/bumblebee.jpg" alt="bumblebee" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/dachacher3nova.jpg" target="_blank">
+                  <img src="photos/dachacher3nova.jpg" alt="dachacher3nova" />
+                </a>
+              </div>
+            </div>
+            <div class="photo-item">
+              <div class="photo-frame">
+                <a href="photos/car.jpg" target="_blank" title="car">
+                  <img src="photos/car.jpg" alt="car" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="folder">
+          <summary>decay <span class="photo-count">0</span></summary>
+          <div class="folder-content">
+            <div
+              style="
+                color: #999;
+                font-family: monospace;
+                font-size: 12px;
+                text-align: center;
+                padding: 20px;
+              "
+            >
+              [ no photos yet... ]
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </body>
+</html>
